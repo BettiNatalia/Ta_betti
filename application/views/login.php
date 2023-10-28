@@ -71,7 +71,7 @@
                                 <div class="p-3">
                                     <div class="text-center">
                                     <img src="<?= base_url('assets/image/12.png') ?>" alt="" class="" style="width: 100px; height: 100px;">
-                                    <h4 class="mb-2" style="text-align: center;">Selamat Datang Di SIDPTBS</h4>
+                                    <h4 class="mb-2" style="text-align: center;">Selamat Datang Di SIPTBS</h4>
                                         <p class="mb-4 font-weight-bold" style="text-align: center;">PT. JOHAN SENTOSA</p>
                                         <?php if($this->session->flashdata('error')) :?>
                                             <div class="alert alert-danger" role="alert">

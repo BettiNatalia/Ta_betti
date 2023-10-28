@@ -15,6 +15,8 @@
 
     <title>SIDPTBS_JOHAN</title>
 
+    <link href="<?= base_url('assets/styles.css'); ?>" rel="stylesheet">
+
 
     <!-- Sertakan stylesheet Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -34,11 +36,7 @@
             background-size: cover;
         }
 
-        .sidebar-divider {
-            margin: 10px 0; /* Atur jarak atas dan bawah sesuai keinginan Anda */
-            border: 1px solid #fff; /* Warna dan ketebalan garis pemisah */
-        }
-
+       
         .bg-cyan {
   background-color: cyan;
         }
