@@ -34,7 +34,7 @@ class Delicpo extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_delicpo' => $post['id_delicpo'],
+            
             'delivery' => $post['delivery'],
             'via' => $post['via'],
             'do_no' => $post['do_no'],
@@ -57,14 +57,14 @@ class Delicpo extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_delicpo' => $post['id_delicpo'],
+           
             'delivery' => $post['delivery'],
             'via' => $post['via'],
             'do_no' => $post['do_no'],
             'quantity' => $post['quantity']
             
         ];
-        $this->M_delicpo->Updated($data, $post['where']);
+        $this->M_delicpo->Updated($data, $post['id_delicpo']);
         $this->session->set_flashdata('primary', 'Data Berhasil Di Update');
         redirect(base_url('web/data_delicpo/delicpo'));
 

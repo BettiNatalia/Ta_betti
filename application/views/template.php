@@ -15,11 +15,12 @@
 
     <title>SIDPTBS_JOHAN</title>
 
-    <link href="<?= base_url('assets/styles.css'); ?>" rel="stylesheet">
 
 
     <!-- Sertakan stylesheet Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <!-- 2. Start of file stylesheet.php -->
     <?php include_once "template/stylesheet.php" ?>
@@ -36,13 +37,21 @@
             background-size: cover;
         }
 
-       
-        .bg-cyan {
-  background-color: cyan;
+        .sidebar-divider {
+            margin: 2px 0; /* Angka pertama jarak atas dan angka kedua jarak bawah */
+            border: 1px solid #fff; /* Warna dan ketebalan garis pemisah */
         }
-    </style>
 
-    
+        .bg-cyan {
+            background-color: cyan;
+        }
+
+        .bold-black-text {
+            font-weight: bold;
+            color: black;
+        }
+
+    </style>
 
 </head>
 
@@ -117,6 +126,9 @@
     <!-- Start file of javascript.php -->
     <?php include_once "template/javascript.php" ?>
     <!-- End file of javascript.php -->
+
+
+     
 
 </body>
 

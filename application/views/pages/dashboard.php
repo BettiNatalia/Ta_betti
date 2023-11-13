@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
         <!-- 1. Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="color: black">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" style="color: black;">
                         <h1 class="h3 mb-0 font-weight-bold">Dashboard</h1>
                     </div>
 

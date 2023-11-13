@@ -34,7 +34,7 @@ class Delikernel extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_delikernel' => $post['id_delikernel'],
+           
             'delivery' => $post['delivery'],
             'via' => $post['via'],
             'do_no' => $post['do_no'],
@@ -57,14 +57,14 @@ class Delikernel extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_delikernel' => $post['id_delikernel'],
+            
             'delivery' => $post['delivery'],
             'via' => $post['via'],
             'do_no' => $post['do_no'],
             'quantity' => $post['quantity']
             
         ];
-        $this->M_delikernel->Updated($data, $post['where']);
+        $this->M_delikernel->Updated($data, $post['id_delikernel']);
         $this->session->set_flashdata('primary', 'Data Berhasil Di Update');
         redirect(base_url('web/data_delikernel/delikernel'));
 

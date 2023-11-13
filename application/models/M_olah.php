@@ -15,7 +15,7 @@ class M_olah extends CI_Model
     public function Save($data)
     {
         // Tambahkan tanggal otomatis di sini
-        $data['tanggal'] = date('Y-m-d H:i:s'); // Format tanggal dan waktu MySQL
+        // Format tanggal dan waktu MySQL
 
         return $this->db->insert('tb_olah', $data);
     }

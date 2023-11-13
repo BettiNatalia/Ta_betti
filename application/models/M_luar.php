@@ -3,43 +3,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_luar extends CI_Model
 {
-    public function Get()
+    public function Get($id_tanggal = null)
     {
-        $this->db->select('*');
-        $this->db->from('tbs_luar');
-        $this->db->join('tb_suplier', 'tb_suplier.suplier=tbs_luar.asal_tbs');
-        $query = $this->db->get();
-        return $query->result();
+        if ($id_tanggal !== null) {
+            $this->db->where('id_tanggal', $id_tanggal);
+        }
+
+        return $this->db->get('tb_tgl_luar');
     }
 
-    function Save($data)
+    public function Save($data)
     {
-        return $this->db->insert('tbs_luar', $data);
+
+        return $this->db->insert('tb_tgl_luar', $data);
     }
 
-    function Updated($data, $where)
+    public function Updated($data, $where)
     {
-        $this->db->where('id_tbs', $where);
-        return $this->db->update('tbs_luar', $data);
-    }
-    function Deleted($id_tbs)
-    {
-        return $this->db->delete('tbs_luar', ['id_tbs' => $id_tbs]);
+        $this->db->where('id_tanggal', $where);
+        return $this->db->update('tb_tgl_luar', $data);
     }
 
-    function GetIdSuplier()
+    public function Deleted($id_tanggal)
     {
-        $query = $this->db->get('tb_suplier');
-        return $query->result_array();
+        return $this->db->delete('tb_tgl_luar', ['id_tanggal' => $id_tanggal]);
     }
 
-    function GetIdLuar($id_tbs)
-
+    public function Deleted_tb($id_inti)
     {
-        $this->db->where('id_tbs', $id_tbs);
-        $query = $this->db->get('tbs_luar');
-        return $query->row_array();
+        return $this->db->delete('tbs_luar', ['id_luar' => $id_luar]);
     }
-
-
 }

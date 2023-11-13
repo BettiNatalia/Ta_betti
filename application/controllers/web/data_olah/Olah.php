@@ -7,24 +7,27 @@ class Olah extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('M_user');
+        $this->load->model('M_olah');
         if ($this->session->userdata('login') != TRUE) {
             redirect(base_url());
         }
 
-        $this->load->model('M_olah');
+        
     }
 
     public function index()
     {
-        $data['data'] = $this->M_olah->Get()->result();
+        $data['data'] = $this->db->query("SELECT * FROM tb_olah a INNER JOIN tb_shift b ON a.shift = b.id_shift")->result();
         $data['pages'] = 'web/olah_tbs/olah';
         $this->load->view('template', $data);
     }
 
     public function add()
     {
+        
         $data['pages'] = 'web/olah_tbs/add_olah';
+        // 
+        $data['shift'] = $this->db->get('tb_shift')->result();
         $this->load->view('template', $data);
     }
 
@@ -32,11 +35,11 @@ class Olah extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_asisten' => $post['id_asisten'],
+            
             'nama_asisten' => $post['nama_asisten'],
             'shift' => $post['shift'],
             'lori_olah' => $post['lori_olah'],
-            'tanggal' => date('Y-m-d H:i:s') // Tanggal dan waktu otomatis saat data disimpan
+            'tanggal' =>$post['tanggal']  // Tanggal dan waktu otomatis saat data disimpan
         ];
         $this->M_olah->Save($data);
         $this->session->set_flashdata('primary', 'Data Berhasil Di Tambahkan');
@@ -46,6 +49,8 @@ class Olah extends CI_Controller
     public function edit($id_asisten)
     {
         $data['data'] = $this->M_olah->Get($id_asisten)->row();
+    // mmm
+        $data['shift'] = $this->db->get('tb_shift')->result();
         $data['pages'] = 'web/olah_tbs/edit_olah';
         $this->load->view('template', $data);
     }
@@ -54,7 +59,7 @@ class Olah extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_asisten' => $post['id_asisten'],
+           
             'nama_asisten' => $post['nama_asisten'],
             'shift' => $post['shift'],
             'lori_olah' => $post['lori_olah'],
@@ -63,6 +68,9 @@ class Olah extends CI_Controller
         $this->M_olah->Updated($data, $post['where']);
         $this->session->set_flashdata('primary', 'Data Berhasil Di Update');
         redirect(base_url('web/data_olah/olah'));
+
+        // id ini role_id pada tabel di database
+        $id = $this->input->post('where');
     }
 
     public function delete($id_asisten)

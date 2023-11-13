@@ -12,39 +12,72 @@ class Auth extends CI_Controller {
     public function index()
     {
         // Jika pengguna sudah login, alihkan ke halaman dashboard
+        $this->load->view('login');
         if ($this->session->userdata('login')) {
             redirect(base_url('dashboard'));
         }
 
-        $this->load->view('login');
+        
     }
 
     public function checklogin()
     {
         $postData = $this->input->post();
+        
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
 
-        $data = [
-            'email' => $postData['email'],
-            'password' => md5($postData['password'])
-        ];
+        $user = $this->db->get_where('tb_user', ['email' => $email])->row_array();
 
-        $checkUser = $this->user->getuserlogin($data);
-
-        if ($checkUser) {
-            // Jika login berhasil, simpan informasi pengguna dalam sesi
-            $sessionData = [
-                'username' => $checkUser->nama,
-                'email' => $checkUser->email,
-                'login' => TRUE
-            ];
-            $this->session->set_userdata($sessionData);
-
-            redirect(base_url('dashboard'));
-        } else {
-            // Jika login gagal, tampilkan pesan kesalahan dan alihkan ke halaman login
-            $this->session->set_flashdata('error', 'Username dan Password Salah');
+        if($user) {
+            if($user['aktif'] == 'Y') {
+                if(password_verify($password, $user['password'])){
+                    $data = [
+                        'username' => $user['nama'],
+                        'email' => $user['email'],
+                        'foto' => $user['foto'],
+                        'login' => TRUE
+                    ];
+                    $this->session->set_userdata($data);
+                    if($user['role_id'] == 1) {
+                        redirect('dashboard');
+                    }else{
+                        redirect('');
+                    }
+                }else{
+                    $this->session->set_flashdata('error', 'Password Salah');
+                    redirect(base_url());
+                }
+            }else{
+                $this->session->set_flashdata('error', 'Akun Anda Tidak Aktif');
+                redirect(base_url());
+            }
+        }else{
+            $this->session->set_flashdata('error', 'Akun Anda Tidak Terdaftar');
             redirect(base_url());
         }
+        // $postData = $this->input->post();
+
+        // $data = [
+        //     'email' => $postData['email'],
+        //     'password' => md5($postData['password'])
+        // ];
+
+        // $checkUser = $this->user->getuserlogin($data);
+
+        // if ($checkUser) {
+        //     $sessionData = [
+        //         'username' => $checkUser->nama,
+        //         'email' => $checkUser->email,
+        //         'login' => TRUE
+        //     ];
+        //     $this->session->set_userdata($sessionData);
+
+        //     redirect(base_url('dashboard'));
+        // } else {
+        //     $this->session->set_flashdata('error', 'Username dan Password Salah');
+        //     redirect(base_url());
+        // }
     }
 
     public function logout()

@@ -1,20 +1,18 @@
 <div class="container-fluid">
 
-    <!-- Page Heading -->
+<!-- 1.  Page Heading -->
     <div class="card shadow">
         <div class="card-header">Tambah Data Delivery Kernel</div>
         <div class="card-body">
             <div class="row">
+<!-- 2. col-sm-3 sudah terisii sehingga konten lainnya harus melewati 3 kolom -->
                 <div class="col-sm-3">
-                    <a href="<?= base_url('web/data_delikernel/delikernel/') ?>" class="btn btn-primary btn-sm">Back</a>
+                    <!-- <a href="<?= base_url('web/data_delikernel/delikernel/') ?>" class="btn btn-primary btn-sm">Back</a> -->
                 </div>
+<!-- 3. col-sm-6 untuk membuat panjang form -->
                 <div class="col-sm-6">
-                    <form action="<?= base_url('web/data_delikernel/delikernel/create/') ?>"
-                        class="user form-horizontal" method="POST">
-                        <div class="form-group">
-                            <label for="id_delikernel">ID Delivery</label>
-                            <input type="text" class="form-control" name="id_delikernel" value="">
-                        </div>
+                    <form action="<?= base_url('web/data_delikernel/delikernel/create/') ?>"class="user form-horizontal" method="POST">
+                        
                         <div class="form-group">
                             <label for="delivery">Delivery</label>
                             <input type="text" class="form-control" name="delivery" value="">
@@ -31,7 +29,9 @@
                             <label for="quantity">Quantity</label>
                             <input type="text" class="form-control" name="quantity" value="">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Tambah Data</button>
+<!-- 4. membuat button simpan dan close -->
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <a href="<?= base_url('web/data_delikernel/delikernel') ?>" class="btn btn-secondary btn-sm">Close</a>
                     </form>
                 </div>
             </div>

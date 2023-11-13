@@ -1,0 +1,135 @@
+<div class="container-fluid">
+    <!-- 1. Page Heading -->
+
+    <!-- 2. membuat tampilan alert di tengah dan paling atas jika ingin membuat alert di bawah letakkan source code di bawah -->
+    <div class="row mt-5 d-sm-flex">
+        <div class="col-6">
+            <?php if ($this->session->flashdata('primary')) : ?>
+                <div class="alert alert-primary" role="alert" style="text-align: center;">
+                    <?= $this->session->flashdata('primary') ?>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <!-- 3. untuk membuat teks data user -->
+    <div>
+        <h1 class="h3 mb-3 font-weight-bold" style="color: black">Data Inti TBS</h1>
+    </div>
+
+    
+
+    <!-- 4. untuk membuat card -->
+    <div class="row">
+        <div class="card col-sm-12">
+            <!-- 5. untuk membuat button tambah data dimana berada pada card header & untuk membuat print di ujung tambahkan beetwen &justify-content untuk membuat horizontal -->
+            <div class="mt-3 mb-0 d-flex justify-content-between">
+                <a href="<?= base_url();?>web/data_inti/inti/add_tbs_inti/<?=$id;?>" class="d-none d-sm-inline-block btn btn-sm shadow-sm" style="color: black; background-color: lightcyan">Tambah Data</a>
+                <a href="<?php echo base_url('web/data_inti/inti/print'); ?>" class="btn btn-info btn-sm" style="color: black;"> <i class="fa fa-print"></i>Print</a>
+            </div>
+
+            <!-- 6. untuk membuat konten bagian isi card body dan tag hr membuat garis lurus   -->
+            <hr style="color: black; border-style: solid; border-width: 1px;">
+
+            <!-- 6a. untuk membuat tabel user dan tabel button tambah data menyatu jika dihapus maka akan terpisah-->
+            <div class="">
+                <div class="row">
+
+                    <!-- 7. Teks "Search:" dan kotak pencarian yang berada -->
+                    <div class="col-md-3 col-12 d-flex align-items-center">
+                        <span class="h6 mb-0 font-weight-bold" style="margin right: 10px; color: black;">Search:</span>
+                        <!-- untuk membuat panah tetap berada di pencarian maka gunakan autofocus, dan search menggunakan script -->
+                        <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Cari Pengguna" name="keyword" autocomplete="off" autofocus style="color: black; height: 35px;">
+                    </div>
+
+                    <!-- 8. untuk Penambahan elemen Show dan Entries yang membuat show entries disebelah kanan paling ujung, harus menggunakan col-12 -->
+                    <div class="col-md-9 col-12 d-flex align-items-center justify-content-end">
+                        <div class="dataTables_length" id="dataTable_length">
+                            <label class="d-flex align-items-center">
+                                Show
+                                <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                    <option value="10">10</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                Entries
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive p-2">
+                    <!-- tabel hover untuk membuat kolom data tabel lebih gelap ketika kursor tertuju -->
+                    <table id="yourTableID" class="table table-bordered table table-striped table-hover">
+                        <thead style="font-size: 13px; font-weight: bold; color: black">
+                            <tr>
+                                <th>Divisi <i class="fas fa-sort"></i></th>
+                                <th>Janjang <i class="fas fa-sort"></i></th>
+                                <th>Tonase <i class="fas fa-sort"></i></th>
+                                <th>BJR <i class="fas fa-sort"></i></th>
+                                <!-- harus menggunakan style untuk membuat teks ketengah dan tidak bisa menggunakan class d-flex karena itu bisa untuk button -->
+                                <th colspan="2" style="text-align: center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $total = array(
+                                'janjang' => 0,
+                                'tonase' => 0,
+                                'BJR' => 0,
+                                
+                            );
+                            ?>
+                            <?php foreach ($data as $datas): ?>
+                                <tr style="font-size: 13px; color: black">
+                                    <td><?= $datas->divisi ?></td>
+                                    <td><?= $datas->janjang ?></td>
+                                    <td><?= $datas->tonase ?></td>
+                                    <td><?= $datas->BJR ?></td>
+                                    <td onclick="return confirm('Anda Yakin Ingin Mengedit?')">
+                                        <a href="<?= base_url();?>web/data_inti/inti/edit_tbs_inti/<?=$datas->id_inti;?>/<?=$datas->id_tanggal;?>" class="btn btn-info btn-sm">Edit</a>
+                                    </td>
+                                    <td onclick="return confirm('Anda Yakin Ingin Menghapus?')">
+                                        <a href="<?= base_url();?>web/data_inti/inti/delete_tbs_inti/<?=$datas->id_inti;?>/<?=$datas->id_tanggal;?>" class="btn btn-danger btn-sm">Hapus</a>
+                                    </td>
+                                </tr>
+                                <?php
+                                $total['janjang'] += $datas->janjang;
+                                $total['tonase'] += $datas->tonase;
+                            ?>
+                            <?php endforeach ?>
+                            <tr style="color: black;">
+                                <td><strong>Total:</strong></td>
+                                <td><strong><?= $total['janjang'] ?></strong></td>
+                                <td><strong><?= $total['tonase'] ?></strong></td>
+                            <!-- number_format digunkaan untuk mengkonversi angka menjadi bilangan bulat. untuk membuat 2 angka di belakang koma tambahkan ,2 setelah ] janjang -->
+                                <td>
+                                    <?php if($total['tonase'] == 0 && $total['janjang'] == 0) : ?>
+                                    <strong>0</strong>
+                                    <?php else : ?>
+                                        <?=number_format($total['tonase'] / $total['janjang']) ?>
+                                    <?php endif;?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tr class="mb-5" style="color: black; font-weight: bold; text-align: center; font-size: 13px">
+                            <td style="border: 4px solid blue; background-color: #e0e0e0;"><strong>Total TBS Inti : <?= $total['tonase'] ?></strong></td>
+                        </tr>
+                    </table>
+
+                    
+                </div>
+                
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- untuk membuat ke halaman selanjutnya menggunakan path controller -->
+    <div class="row container-fluid">
+                    <div class="col-sm-3 mt-3 mb-3">
+                    <a href="<?= base_url('web/data_inti/inti') ?>" class="btn btn-primary btn-sm"> <i class="fas fa-sort-amount-up fa-rotate-270"></i>Kembali</a>
+                </div>
+                </div>

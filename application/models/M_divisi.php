@@ -1,5 +1,3 @@
-<!-- Model Dosen -->
-
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -21,7 +19,7 @@ class M_divisi extends CI_Model
 
     function Updated($data, $where)
     {
-        $this->db->where('id_divsi', $where);
+        $this->db->where('id_divisi', $where);
         return $this->db->update('tb_divisi', $data);
     }
     function Deleted($id_divisi)

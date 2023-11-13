@@ -22,12 +22,13 @@
     <!-- 4. untuk membuat header atau judul tabel ke samping di beri warna lightcyan -->
                     <thead style="font: size 3px; font-weight: bold; background-color: lightcyan; color: black">
                         <tr>
-                            <th>ID Asisten</th>
-                            <th>Nama Asisten</th>
+                            
+                        <th># <i class="fas fa-sort"></i></th>    
+                        <th>Nama Asisten</th>
                             <th>Shift</th>
                             <th>Lori Olah</th>
                             <th>Tanggal</th>
-                            <th>Aksi</th>
+                            <th colspan="2" style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
     <!-- 5. untuk mengelompokkan elemen tabel yaitu isi dari data tabel  -->
@@ -39,14 +40,16 @@
                         
                     );
                     ?>
+                <!-- inisialisasi variabel i -->
+                    <?php $i=1 ;?>
     <!-- 7. membuat perulangan dengan forech  dan tidak perlu menambahkan tag tabel karena masih dalam tag tbody-->
                         <?php foreach ($data as $datas): ?>
                             <tr style="font: size 3px; background-color: aliceblue; color: black">
-                                <td><?= $datas->id_asisten ?></td>
+                                <td><?= $i ?></td>
                                 <td><?= $datas->nama_asisten ?></td>
                                 <td><?= $datas->shift ?></td>
                                 <td><?= $datas->lori_olah ?></td>
-                                <td><?= date('d-m-Y H:i:s', strtotime($datas->tanggal)) ?></td>
+                                <td><?= $datas->tanggal ?></td>
 
     <!-- 8. untuk membuat button edit dan hapus -->
                                 <td>
@@ -62,6 +65,7 @@
                        
                         ?>
     <!-- 10. tambah kolom baru khusus total dan data yang terisi khusus lori-olah-->
+                        <?php $i++; ?>
                         <?php endforeach ?>
                         <tr style="background-color: lightcyan; color: black">
                         <td><strong>Total :</strong></td>

@@ -34,7 +34,7 @@ class Suplier extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_suplier' => $post['id_suplier'],
+            
             'suplier' => $post['suplier']
             
         ];
@@ -54,11 +54,11 @@ class Suplier extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_suplier' => $post['id_suplier'],
+            
             'suplier' => $post['suplier']
             
         ];
-        $this->M_suplier->Updated($data, $post['where']);
+        $this->M_suplier->Updated($data, $post['id_suplier']);
         $this->session->set_flashdata('primary', 'Data Berhasil Di Update');
         redirect(base_url('web/data_suplier/suplier'));
 

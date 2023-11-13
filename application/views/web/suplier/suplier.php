@@ -1,66 +1,73 @@
 <div class="container-fluid">
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 font-weight-bold" style="color: black">Data suplier</h1>
-                        <a href="<?=base_url('web/data_suplier/suplier/add');?>" class="d-none d-sm-inline-block btn btn-sm shadow-sm " style="color: black; background-color: lightcyan"><i
-                                class="fas fa-sm text-white-50"></i> Tambah Data</a>
-                    </div>
-
-					<!-- 2. untuk membuat warna peringatan warna biru -->
-					<?php if ($this->session->flashdata('primary')): ?>
-						<div class="alert alert-primary" role="alert">
-							<?= $this->session->flashdata('primary') ?>
-						</div>
-					<?php endif ?>
-
-    
-                    <div class="row">
-                    	<div class="card col-sm-12">
-                    		<div class="card-header">
-                    			<label for="" class="card-tittle font-weight-bold" style="color: black">Data Supplier</label>
-                    			</div>
-                    			<div class="card-body" style="background-color: lightcyan">
-                    				<div class="table-responsive">
-                    					<table class="table table-boardered">
-                                        <thead style="font-size: 13px; font-weight: bold; color: black">
-                    <tr>
-                            <th># <i class="fas fa-sort"></i></th>
-                            <th>Supplier <i class="fas fa-sort"></i></th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-       
-
-            <!-- data ke database -->
-                    <?php $i=1 ;?>
-                    <?php foreach ($data as $datas): ?>
-                        <tr style="font-size: 13px; color: black">
-                            <td><?= $i ?></td>
-                            <td><?= $datas->suplier ?></td>
-                            <td>
-                                <a href="<?= base_url('web/data_suplier/suplier/edit/' . $datas->id_suplier) ?>"
-                                    class="btn btn-info btn-sm">Edit</a>
-                                <a href="<?= base_url('web/data_suplier/suplier/delete/' . $datas->id_suplier) ?>"
-                                    class="btn btn-danger btn-sm">Hapus</a>
-                            </td>
-                        </tr>
-
-                
-        <!-- tambah kolom baru khusus total -->
-                        <?php $i++;?>
-                        <?php endforeach ?>
-                        
-
-                        
-
-                        <!-- batas dari kolom baru -->
-                    </tbody>
-                </table>
-                <!-- Earnings (Monthly) Card Example -->
-               
-            </div>
+<!-- 1. membuat tampilan alert di tengah dan paling atas jika ingin membuat alert di bawah letakkan source code di bawah -->
+    <div class="row mt-5 d-sm-flex">
+        <div class="col-12">
+            <?php if ($this->session->flashdata('primary')) : ?>
+                <div class="alert alert-primary" role="alert" style="text-align: center;">
+                <?= $this->session->flashdata('primary') ?>
+                </div>
+            <?php endif ?>
         </div>
     </div>
+
+<!--2.  untuk membuat link teks data User dan dashboard -->
+    <div class="mt-0 mb-0 d-flex justify-content-between">
+        <a class="nav-link" href="<?= base_url() ?>web/data_suplier/suplier">
+        <span class="h6 font-weight-bold" style=" color: primary;"><i class="fas fa-file"></i> Data Suplier</span>
+        </a>
+        <a class="nav-link" href="<?= base_url() ?>dashboard">
+        <span class="h6 font-weight-bold" style="color: primary;"><i class="fas fa-tachometer-alt"></i> Dashboard</span>
+        </a>
+    </div>
+
+
+<!-- 3-4. DataTales Example -->
+<!-- ada card-shadow mb-2 yang membuat jarak antar baris tabel -->
+<div class="card shadow mb-2">
+        <div class="mt-3 mb-0 container-fluid">
+<!-- 4. membuat Button tambah di sebelah kiri. untuk memindahkan button gunakan float:left atau float right -->
+            <a href="<?= base_url('web/data_suplier/suplier/add') ?>" class="btn btn-info btn-sm mb-0" style="float: left;"><i class="fas fa-plus"></i>Tambah Data</a>
+    </div>
+
+
+<!-- 5. membuat card body -->
+<div class="card-body">
+        <hr style="color: black; border-style: solid; border-width: 1px;">
+            <div class="table-responsive">
+                <table class="table table-bordered table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+
+<!--  6. untuk membuat head tabel kepala tabel-->
+                    <tr>
+                        <th class="text-center" style="color: black;">#</th>
+                        <th class="text-center" style="color: black;">Supplier </th>
+                        <th class="text-center" style=" color: black;">Aksi</th>
+                    </tr>
+                </thead>
+
+
+<!-- 7. untuk membuat isi kolom perbaris dengan tbody -->
+                <tbody> <!-- data ke database -->
+<!-- 8. membuat inisialisasi i=1 untuk mengisi nilai tag # -->
+                    <?php $i=1 ;?>
+                    <?php foreach ($data as $datas): ?>
+                    <tr style="font-size: 13px; color: black">
+                            <td><?= $i ?></td>
+                            <td><?= $datas->suplier ?></td>
+<!-- 9. untuk membuat isi kolom aksi dengan lebar 70px -->
+                            <td style="width: 70px;">
+                            <a class=" btn-sm bg-gradient-primary" onclick="return confirm('Anda Yakin Ingin Edit')" href="<?= base_url('web/data_suplier/suplier/edit/' . $datas->id_suplier) ?>" class=""><i class="far fa-edit" style="color: #fcfcfd;"></i></a>
+                            <a class="btn-sm bg-gradient-danger" onclick="return confirm('Anda Yakin Ingin Hapus')" href="<?= base_url('web/data_suplier/suplier/delete/' . $datas->id_suplier) ?>"><i class="fas fa-trash" style="color: #f1f2f4;"></i></a>
+                            </td>
+                    </tr>
+<!-- 8. membuat akhir dari endforeach -->
+                <?php $i++; ?>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+        </div>
 </div>
+</div>
+</div>
+

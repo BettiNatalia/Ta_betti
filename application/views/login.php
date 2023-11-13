@@ -83,13 +83,13 @@
                                     <form class="user" action="<?= base_url('auth/checklogin') ?>" method="POST">
                                         <div class="mb-3">
                                         <label for="email" class="form-label">Email / Username</label>
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan Email / Username"/>
+                                        <input type="text"required class="form-control" id="email" name="email" placeholder="Masukkan Email / Username"/>
                                         </div>
 
                                         <div class="mb-4">
                                         <label for="password" class="form-label">Password</label>
                                         <div class="input-group">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                                        <input type="password" required class="form-control" id="password" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
                                             
                                         <div class="input-group-append">
                                                 <button type="button" class="btn btn-light" id="togglePassword">

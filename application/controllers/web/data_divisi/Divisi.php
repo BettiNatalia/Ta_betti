@@ -34,7 +34,7 @@ class Divisi extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_divisi' => $post['id_divisi'],
+            
             'divisi' => $post['divisi']
             
         ];
@@ -54,11 +54,11 @@ class Divisi extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_divisi' => $post['id_divisi'],
+            
             'divisi' => $post['divisi']
             
         ];
-        $this->M_divisi->Updated($data, $post['where']);
+        $this->M_divisi->Updated($data, $post['id_divisi']);
         $this->session->set_flashdata('primary', 'Data Berhasil Di Update');
         redirect(base_url('web/data_divisi/divisi'));
 

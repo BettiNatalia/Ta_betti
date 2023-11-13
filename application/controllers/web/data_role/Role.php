@@ -34,7 +34,7 @@ class Role extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_role' => $post['id_role'],
+        
             'jabatan' => $post['jabatan']
             
         ];
@@ -54,11 +54,12 @@ class Role extends CI_Controller
     {
         $post = $this->input->post();
         $data = [
-            'id_role' => $post['id_role'],
+           
             'jabatan' => $post['jabatan']
             
         ];
-        $this->M_role->Updated($data, $post['where']);
+        // where diganti menjadi id_role sebagai keyword
+        $this->M_role->Updated($data, $post['id_role']);
         $this->session->set_flashdata('primary', 'Data Berhasil Di Update');
         redirect(base_url('web/data_role/role'));
 
